@@ -4,10 +4,8 @@ import com.ajo.itedo.data.AjoBranch;
 import com.ajo.itedo.dto.AjoBranchDto;
 import com.ajo.itedo.service.AjoBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
