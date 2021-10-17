@@ -3,6 +3,7 @@ package com.ajo.itedo.data;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,14 +17,13 @@ public class LoanHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Loan loan;
 
-    private Double weeklyPayment;
+    private Double currentPayment;
 
     private LocalDate dateOfPayment;
 
-    private Double amountRemaining;
-
+    private Double balance ;
 
 }

@@ -20,10 +20,11 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
 @Service("applicationUserService")
 public class ApplicationUserServiceImpl implements ApplicationUserService, UserDetailsService {
-
+    Logger logger = Logger.getLogger(ApplicationUserServiceImpl.class.getName());
     @Autowired
     ApplicationUserRepo applicationUserRepo;
 
@@ -43,31 +44,28 @@ public class ApplicationUserServiceImpl implements ApplicationUserService, UserD
         applicationUser.setPassword(passwordConfig.passwordEncoder().encode(applicationUserDto.getPassword()));
         applicationUserRepo.save(applicationUser);
 
-        return "User with "+applicationUserDto.getEmail()+ "was saved successfully";
+        return "Admin with "+applicationUserDto.getEmail()+ "was saved successfully";
     }
 
     @Override
     public String generateToken(ApplicationUserDto applicationUserDto) {
         Optional<ApplicationUser> user = applicationUserRepo.findApplicationUserByUsername(applicationUserDto.getEmail());
-        try {
-            if (user.get().getIsActive()){
-                return  "BAD REQUEST";
-            }
-            else {
-                final Authentication authentication = authenticationManager
-                        .authenticate(
-                                new UsernamePasswordAuthenticationToken(
-                                        applicationUserDto.getEmail(),
-                                        applicationUserDto.getPassword()
-                                )
-                        );
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                return tokenProvider.generateToken(authentication,user.get());
-            }
-        }catch (RuntimeException e){
-            return e.getMessage();
-        }
+        if (user.isPresent()){
+            logger.info(user.get().toString()+"...the user");
+            final Authentication authentication = authenticationManager
+                    .authenticate(
+                            new UsernamePasswordAuthenticationToken(
+                                    applicationUserDto.getEmail(),
+                                    applicationUserDto.getPassword()
+                            )
+                    );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return tokenProvider.generateToken(authentication,user.get());
 
+        }
+        else {
+            return "Not found";
+        }
     }
 
     @Override

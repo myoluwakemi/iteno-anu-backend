@@ -11,6 +11,7 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -43,9 +44,14 @@ public class Loan {
     @NotNull
     private LocalDate dueDate;
 
+    private LOANSTATUS loanStatus = LOANSTATUS.PENDING;
+
+    private Double amountPaid = BigDecimal.ZERO.doubleValue();
+
     @CreationTimestamp
-    private LocalDate created;
+    private LocalDateTime created;
 
     @UpdateTimestamp
-    private LocalDate lastUpdated;
+    private LocalDateTime lastUpdated;
+
 }

@@ -9,4 +9,6 @@ public interface AjoBranchService {
     String save(AjoBranchDto ajoBranchDto);
     AjoBranch findAjoBranchByBranchName(String branchName);
     List<AjoBranch> getAllAjoBranches();
+    AjoBranch updateBranch(Integer branchId,AjoBranchDto ajoBranchDto);
+    String deleteBranch(Integer branchId);
 }

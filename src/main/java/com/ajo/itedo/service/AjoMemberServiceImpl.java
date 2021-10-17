@@ -25,7 +25,7 @@ public class AjoMemberServiceImpl implements AjoMemberService{
     @Override
     public String save(AjoMemberDto ajoMemberDto) {
         if (ajoMemberRepo.existsAjoMemberByCardNumber(ajoMemberDto.getCardNumber())){
-            return "Member with card number"+ ajoMemberDto.getCardNumber() + "Already exist";
+            return "Member with card number "+ ajoMemberDto.getCardNumber() + " Already exist";
         }
         else {
             AjoMember ajoMember = new AjoMember();
@@ -71,7 +71,7 @@ public class AjoMemberServiceImpl implements AjoMemberService{
                 ajoMember.setPhotograph(ajoMemberDto.getPhotograph());
             }
             if (ajoMemberDto.getTotalSavings() != null){
-                ajoMember.setTotalSavings(ajoMemberDto.getTotalSavings());
+                ajoMember.setTotalSavings(ajoMemberDto.getTotalSavings()+ajoMember.getTotalSavings());
             }
             ajoMemberRepo.save(ajoMember);
             return ajoMember;
@@ -83,15 +83,19 @@ public class AjoMemberServiceImpl implements AjoMemberService{
     }
 
     @Override
-    public String deleteMember(String cardNumber) {
-        if (ajoMemberRepo.findAjoMemberByCardNumber(cardNumber).isPresent()) {
-            ajoMemberRepo.deleteAjoMemberByCardNumber(cardNumber);
-            return "Member with card number "+ cardNumber + " was deleted successfully";
+    public String deleteMember(String cardNumber) throws Exception {
+        try {
+            if (ajoMemberRepo.findAjoMemberByCardNumber(cardNumber).isPresent()) {
+                ajoMemberRepo.deleteAjoMemberByCardNumber(cardNumber);
+                return "Member with card number "+ cardNumber + " was deleted successfully";
+            }
+            else {
+                return "Not Found";
+            }
         }
-        else {
-            return "Not Found";
+        catch (Exception e){
+            return e.getCause().getMessage()+ ", Member with card number "+cardNumber+ " has a relationship in the database";
         }
-
     }
 
     @Override

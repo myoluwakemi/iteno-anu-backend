@@ -9,5 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class AjoBranchDto {
     private String branchName;
+
     private  String address;
+
+    private Double weeklySavings;
+
+    private Double monthlySavings;
+
+    private Double developmentLoan;
+
+    private Double buildingLoan;
 }

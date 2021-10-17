@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static com.ajo.itedo.controller.config.SecurityConstants.*;
@@ -20,7 +21,7 @@ import static com.ajo.itedo.controller.config.SecurityConstants.*;
 
 @Component
 public class TokenProvider implements Serializable {
-
+   Logger logger = Logger.getLogger(TokenProvider.class.getName());
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -48,6 +49,7 @@ public class TokenProvider implements Serializable {
     }
 
     public String generateToken(Authentication authentication, ApplicationUser user) {
+        logger.info("the user "+ user+ " .....................got it");
          String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));

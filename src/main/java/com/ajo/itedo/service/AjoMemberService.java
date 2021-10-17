@@ -12,7 +12,7 @@ public interface AjoMemberService {
 
     AjoMember updateMemberByCardNumber(String cardNumber, AjoMemberDto ajoMemberDto);
 
-    String deleteMember(String cardNumber);
+    String deleteMember(String cardNumber) throws Exception;
 
     List<AjoMember> getMemberByBranch(String branchName);
 

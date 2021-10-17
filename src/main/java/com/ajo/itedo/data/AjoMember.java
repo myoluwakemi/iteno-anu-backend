@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,11 +42,11 @@ public class AjoMember {
 
     private Boolean isGuarantor = Boolean.FALSE;
 
-    private Boolean collectedLoan = Boolean.FALSE;
+    private Boolean isBorrower = Boolean.FALSE;
 
     @CreationTimestamp
-    private LocalDate created;
+    private LocalDateTime created;
 
     @UpdateTimestamp
-    private LocalDate lastUpdated;
+    private LocalDateTime lastUpdated;
 }
