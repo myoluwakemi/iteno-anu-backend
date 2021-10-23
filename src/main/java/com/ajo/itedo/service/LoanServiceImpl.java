@@ -79,7 +79,6 @@ public class LoanServiceImpl  implements LoanService{
         if (loanRepo.findById(loadId).isPresent()){
             Loan loan = loanRepo.findById(loadId).get();
             if (loan.getAmountPaid() >= loan.getLoanAmount()){
-                loan.setLoanStatus(LOANSTATUS.COMPLETED);
                 updateMemberStatus(loadId);
                 loanRepo.save(loan);
                 return "Done with your loan repayment";

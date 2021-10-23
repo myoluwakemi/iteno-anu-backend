@@ -72,6 +72,7 @@ public class AjoMemberServiceImpl implements AjoMemberService{
             }
             if (ajoMemberDto.getTotalSavings() != null){
                 ajoMember.setTotalSavings(ajoMemberDto.getTotalSavings()+ajoMember.getTotalSavings());
+                ajoMember.setCurrentSavings(ajoMemberDto.getTotalSavings());
             }
             ajoMemberRepo.save(ajoMember);
             return ajoMember;

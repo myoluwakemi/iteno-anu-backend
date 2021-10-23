@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -38,7 +39,15 @@ public class AjoMember {
 
     private Double totalSavings = BigDecimal.ZERO.doubleValue();
 
+    private Double currentSavings = BigDecimal.ZERO.doubleValue();
+
+    private Double currentLoan = BigDecimal.ZERO.doubleValue();
+
+    private Double currentLoanBalance = BigDecimal.ZERO.doubleValue();
+
     private String photograph;
+
+    private LOANSTATUS loanstatus = LOANSTATUS.INACTIVE;
 
     private Boolean isGuarantor = Boolean.FALSE;
 
@@ -49,4 +58,5 @@ public class AjoMember {
 
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
+
 }

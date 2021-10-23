@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -44,9 +43,11 @@ public class Loan {
     @NotNull
     private LocalDate dueDate;
 
-    private LOANSTATUS loanStatus = LOANSTATUS.PENDING;
 
     private Double amountPaid = BigDecimal.ZERO.doubleValue();
+
+    private Double loanBalance = BigDecimal.ZERO.doubleValue();
+
 
     @CreationTimestamp
     private LocalDateTime created;

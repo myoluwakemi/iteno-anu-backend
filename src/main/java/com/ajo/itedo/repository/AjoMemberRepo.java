@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public interface AjoMemberRepo extends JpaRepository<AjoMember,Integer> {
     Optional<AjoMember> findAjoMemberByCardNumber(String cardNumber);
     void deleteAjoMemberByCardNumber(String cardNumber);
     Boolean existsAjoMemberByCardNumber(String cardNumber);
+
 
 
 
